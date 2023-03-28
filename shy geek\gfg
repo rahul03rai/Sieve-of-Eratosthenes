@@ -1,0 +1,31 @@
+long long maxChocolates=0, left=0, right=n-1;
+        
+        while(k>0)
+        {
+            int maxPrice=0;
+            while(left<=right)
+            {
+                int mid=(left+right)/2;
+                int price=shop.get(mid);
+                if(price>k)
+                    right=mid-1;
+                else
+                {
+                    maxPrice=price;
+                    left=mid+1;
+                }
+            }
+            if(maxPrice==0)
+                break;
+            
+            int numberOfChocolates=(int)k/maxPrice;
+            
+            maxChocolates+=numberOfChocolates;
+            
+            k=k%maxPrice;
+            
+            left=0;
+        }
+        
+        return maxChocolates;
+    }
