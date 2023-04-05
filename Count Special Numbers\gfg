@@ -1,0 +1,17 @@
+ int ans=0,ma=INT_MAX;
+        sort(arr.begin(),arr.end());
+        for(int i=0;i<N;i++){
+            ma=INT_MAX;
+            if(arr[i]==-1)continue;
+            for(int j=i+1;j<N;j++){
+                //if(arr[j]==arr[i])
+                if(arr[j]%arr[i]==0){
+                    ans++;
+                    //if(arr[j]==arr[i])ans++;
+                    ma=min(ma,arr[j]);
+                    arr[j]=-1;
+                }
+            }
+            if(arr[i]==ma)ans++;
+        }
+        return ans;
