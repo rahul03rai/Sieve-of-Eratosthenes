@@ -1,0 +1,15 @@
+long long int mod=1e9+7;
+    vector<ll> nthRowOfPascalTriangle(int rowIndex) {
+        // BASE CASE
+        if (rowIndex==1)
+            return {1};
+        
+        vector<ll> currentRow = {1};
+        // RECURSIVE CALL
+        vector<ll> previousRow = nthRowOfPascalTriangle(rowIndex - 1);
+        
+        for(int i=1; i<rowIndex-1; i++){
+            currentRow.push_back((previousRow[i-1] + previousRow[i])%mod);
+        }
+        currentRow.push_back(1);
+        return currentRow;
