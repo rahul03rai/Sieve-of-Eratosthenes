@@ -1,0 +1,12 @@
+int arr[]={2000,500,200,100,50,20,10,5,2,1};
+        int i=0;
+        vector<int> v;
+       while(N!=0){
+           if(N>=arr[i]){
+              N=N-arr[i]; 
+              v.push_back(arr[i]);
+           }
+           else i++;
+           
+       }
+       return v;
