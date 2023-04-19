@@ -1,0 +1,52 @@
+//{ Driver Code Starts
+//Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+//User function Template for C++
+
+class Solution{
+    public:
+    bool wifiRange(int n, string s, int x){
+        // code here
+        vector<int>ans(n, -1);
+        
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]=='1')
+            {
+                for(int j=i;j<=i+x;j++)
+                    if(j<n)
+                        ans[j]=1;
+                
+                for(int j=i;j>=i-x;j--)
+                    if(j>=0)
+                        ans[j]=1;
+            }
+        }
+        for(auto it:ans){
+            if(it==-1)
+                return false;
+        }
+        return true;
+    }
+};
+
+//{ Driver Code Starts.
+
+int main(){
+    int T;
+    cin >> T;
+    while(T--){
+        int N, X;
+        string S;
+        cin >> N >> X >> S;
+        Solution obj;
+        cout << obj.wifiRange(N, S, X) << "\n";
+    }
+}
+
+// } Driver Code Ends
