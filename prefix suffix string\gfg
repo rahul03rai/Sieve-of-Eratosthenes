@@ -1,0 +1,65 @@
+class Solution{
+public:
+    class TrieNode
+    {
+        public:
+            bool isEnd;
+            TrieNode* children[26];
+            TrieNode()
+            {
+                isEnd=false;
+                for(int i=0;i<26;i++)
+                {
+                    children[i]=NULL;
+                }
+            }
+            void insert(string s1, TrieNode* root)
+            {
+                TrieNode* curr=root;
+                for(int i=0;i<s1.length();i++)
+                {
+                    int index=s1[i]-'a';
+                    if(curr->children[index]==NULL)
+                    {
+                        curr->children[index]=new TrieNode();
+                    }
+                    curr=curr->children[index];
+                }
+                curr->isEnd=true;
+            }
+            bool search(string s1, TrieNode* root)
+            {
+                TrieNode* curr=root;
+                for(int i=0;i<s1.length();i++)
+                {
+                    int index=s1[i]-'a';
+                    if(curr->children[index]==NULL)
+                        return false;
+                    curr=curr->children[index];
+                }
+                return true;
+            }
+    };
+    int prefixSuffixString(vector<string> &s1,vector<string> s2){
+        // Code here
+        TrieNode* root=new TrieNode();
+        
+        for(int i=0;i<s1.size();i++)
+        {
+            root->insert(s1[i], root);
+            reverse(s1[i].begin(), s1[i].end());
+            root->insert(s1[i], root);
+        }
+        
+        int ans=0;
+        for(int i=0;i<s2.size();i++)
+        {
+            string rev=s2[i];
+            reverse(rev.begin(), rev.end());
+            
+            if(root->search(s2[i], root) || root->search(rev, root))
+                ans++;
+        }
+        return ans;
+    }
+};
