@@ -1,0 +1,24 @@
+class Solution{
+public:
+ void generate(vector<int> &arr, int curr, int n, unordered_map<int,int> &XOR, int number){
+        if(curr==n){
+            XOR[number]++;
+            return;
+        }
+        generate(arr,curr+1,n,XOR,number ^ arr[curr]);
+        generate(arr,curr+1,n,XOR,number);
+    }
+    int subsetXOR(vector<int> arr, int N, int K) {
+        // code here
+        
+                unordered_map<int,int> P1,P2;
+        generate(arr,0,N/2,P1,0);
+        generate(arr,N/2,N,P2,0);
+        int res=0;
+        for(auto x: P1){
+            int find=K ^ x.first;
+            res+=(P2[find]*x.second);
+        }
+        return res;
+    }
+};
