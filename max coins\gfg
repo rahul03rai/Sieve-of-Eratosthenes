@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+//User function Template for C++
+
+class Solution{
+public:
+    static bool comp(vector<int> &a, vector<int> &b) {
+        return a[2] > b[2];
+    }
+    int maxCoins(int n,vector<vector<int>> &ranges){
+        sort(ranges.begin(), ranges.end(), comp);
+        
+        int ans = ranges[0][2];
+        
+        for(int i = 0; i < n - 1; i++) {
+            int s = ranges[i][0], e = ranges[i][1], c = ranges[i][2];
+            int maxi = 0, j = i + 1;
+            
+            while(j < n) {
+                if(ranges[j][2] + c < ans) break;
+                
+                if(ranges[j][0] >= e or s >= ranges[j][1]) 
+                    maxi = max(maxi, ranges[j][2]);
+                
+                j++;
+            }
+            
+            ans = max(ans, c + maxi);
+        }
+        
+        return ans;
+    }
+};
